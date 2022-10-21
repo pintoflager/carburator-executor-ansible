@@ -1,8 +1,4 @@
-name = "ansible"
-default = false
 bin = "ansible-runner"
-retry_times = 3
-retry_interval = 10
 
 [target]
 status = "production"
