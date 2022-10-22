@@ -1,7 +1,6 @@
 bin = "ansible-runner"
 
-[target]
-status = "production"
+target = "production"
 
 [requirements]
 local = ["ansible", "ansible-runner", "python3"]
