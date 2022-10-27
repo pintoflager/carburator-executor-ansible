@@ -2,6 +2,10 @@ bin = "ansible-runner"
 
 target = "production"
 
+collections = true
+tasks = true
+actions = false
+
 [requirements]
 local = ["ansible", "ansible-runner", "python3"]
 
