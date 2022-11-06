@@ -1,6 +1,6 @@
 bin = "ansible-runner"
 
-target = "production"
+targets = ["commander"]
 
 collections = true
 tasks = true
