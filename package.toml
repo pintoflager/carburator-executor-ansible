@@ -1,11 +1,14 @@
 bin = "ansible-runner"
 
+# TODO: I think this should be fixed to either commander or worker. If not and some weird executor
+# would like to run on both, how would that be handled from carburator {project|app} install ???
 targets = ["commander"]
 
 collections = true
 tasks = true
 actions = false
 
+# TODO: local is not needed. Executor installs on target host and that's it.
 [requirements]
 local = ["ansible", "ansible-runner", "python3"]
 
