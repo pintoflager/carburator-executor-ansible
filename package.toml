@@ -3,10 +3,8 @@ version = "0.1.0"
 collection = "executor"
 bin = "/usr/bin/env ansible-runner"
 
-targets = ["commander"]
-
 collections = true
 tasks = true
 actions = false
 
-requirements = ["ansible", "ansible-runner", "python3"]
+targets = ["commander"]
