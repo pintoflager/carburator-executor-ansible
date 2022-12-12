@@ -1,10 +1,9 @@
 name = "ansible"
 version = "0.1.0"
-collection = "executor"
-bin = "/usr/bin/env ansible-runner"
+collection = "Executor"
+targets = ["Commander"]
 
+bin = "/usr/bin/env ansible-runner"
 collections = true
 tasks = true
 actions = false
-
-targets = ["commander"]
