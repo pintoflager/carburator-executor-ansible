@@ -4,7 +4,7 @@
 if ! carburator fn integration-installed python3; then
   carburator print terminal error \
     "Missing required program python. Please install it before proceeding."
-    exit 120
+  exit 120
 fi
 
 if ! carburator fn integration-installed pip; then
@@ -21,7 +21,7 @@ if ! carburator fn integration-installed ansible; then
   carburator print terminal warn \
     "Missing required program Ansible. Trying install...."
     
-    python3 -m pip install --user ansible
+  python3 -m pip install --user ansible
 fi
 
 # ansible-runner is required for extracting runtime information from playbooks
@@ -29,7 +29,7 @@ if ! carburator fn integration-installed ansible-runner; then
   carburator print terminal warn \
     "Missing required program ansible-runner. Trying install..."
     
-    python3 -m pip install --user ansible-runner
+  python3 -m pip install --user ansible-runner
 fi
 
 # # python library netaddr is required for ansible.netcommon collection
