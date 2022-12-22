@@ -1,9 +1,10 @@
 name = "ansible"
 version = "0.1.0"
 collection = "Executor"
-targets = ["Commander"]
+project_roles = ["Commander"]
 
-bin = "/usr/bin/env ansible-runner"
 collections = true
 tasks = true
 actions = false
+retry_times = 3
+retry_interval = 10
