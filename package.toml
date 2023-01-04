@@ -1,7 +1,7 @@
 name = "ansible"
 version = "0.1.0"
 collection = "Executor"
-project_roles = ["Commander"]
+platforms = ["Commander"]
 
 collections = true
 tasks = true
