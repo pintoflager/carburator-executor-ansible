@@ -4,7 +4,7 @@
 if ! carburator fn integration-installed python3; then
   carburator print terminal error \
     "Missing required program python. Please install it before proceeding."
-  exit 110
+  exit 120
 fi
 
 if ! carburator fn integration-installed pip; then
@@ -35,7 +35,7 @@ fi
 # # python library netaddr is required for ansible.netcommon collection
 # if ! carburator fn integration-installed "pip show netaddr"; then
 #   carburator print terminal error "Missing required python library netaddr. Please install it" \
-#     "before proceeding." && exit 110
+#     "before proceeding." && exit 120
 # fi
 
 # # Ansible galaxy is required.
