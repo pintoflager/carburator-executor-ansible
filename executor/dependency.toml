@@ -1,7 +1,10 @@
+# name: String,
+# optional: bool
+# version: Option<VersionReq>
+# level: Level
+# optional_with: Option<Vec<String>>
+
 [[dependent]]
 name = "bash"
 optional = false
 level = "Commander"
-# version = Option<VersionReq>,
-# optional_with = Vec<String>,
-
