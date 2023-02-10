@@ -3,8 +3,5 @@ version = "0.1.0"
 collection = "Executor"
 platforms = ["Commander"]
 
-collections = true
-tasks = true
-actions = false
 retry_times = 3
 retry_interval = 10
