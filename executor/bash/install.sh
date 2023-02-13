@@ -1,13 +1,37 @@
 #!/usr/bin/env bash
 
+role="$1"
+
 # Every modern linux should have python installed by default.
-if ! carburator fn integration-installed python3; then
+if ! carburator has program python3; then
   carburator print terminal error \
     "Missing required program python. Please install it before proceeding."
   exit 120
 fi
 
-if ! carburator fn integration-installed pip; then
+# Package installation tasks on a local client node. Runs first
+#
+#
+if [ "$role" = 'client' ]; then
+    carburator print terminal info "Executing ansible install script on $role"
+
+    if ! carburator has program pip || ! carburator has program ansible ||
+    ! carburator has program ansible-runner; then
+        carburator print terminal warn \
+            "Missing ansible / dependencies on local client machine."
+
+        carburator prompt yes-no \
+            "Should we try to install dependencies? Installs on your PC." \
+            --yes-val "Yes try to install with a script" \
+            --no-val "No, I'll install everything"; exitcode=$?
+
+        if [[ $exitcode -ne 0 ]]; then
+          exit 120
+        fi
+    fi
+fi
+
+if ! carburator has program pip; then
   carburator print terminal warn \
     "Missing python package manager pip, trying install..."
 
@@ -17,7 +41,7 @@ if ! carburator fn integration-installed pip; then
   rm -f get-pip.py
 fi
 
-if ! carburator fn integration-installed ansible; then
+if ! carburator has program ansible; then
   carburator print terminal warn \
     "Missing required program Ansible. Trying install...."
     
@@ -25,7 +49,7 @@ if ! carburator fn integration-installed ansible; then
 fi
 
 # ansible-runner is required for extracting runtime information from playbooks
-if ! carburator fn integration-installed ansible-runner; then
+if ! carburator has program ansible-runner; then
   carburator print terminal warn \
     "Missing required program ansible-runner. Trying install..."
     
@@ -33,13 +57,13 @@ if ! carburator fn integration-installed ansible-runner; then
 fi
 
 # # python library netaddr is required for ansible.netcommon collection
-# if ! carburator fn integration-installed "pip show netaddr"; then
+# if ! carburator has program "pip show netaddr"; then
 #   carburator print terminal error "Missing required python library netaddr. Please install it" \
 #     "before proceeding." && exit 120
 # fi
 
 # # Ansible galaxy is required.
-# if ! carburator fn integration-installed ansible-galaxy; then
+# if ! carburator has program ansible-galaxy; then
 #   carburator print terminal error "Missing required program ansible-galaxy. Please install it" \
 #     "before running this script."
 # fi

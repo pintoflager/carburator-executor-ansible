@@ -1,7 +1,7 @@
 name = "ansible"
 version = "0.1.0"
 collection = "Executor"
-platforms = ["Commander"]
+platforms = ["Client", "Commander"]
 
 retry_times = 3
 retry_interval = 10
