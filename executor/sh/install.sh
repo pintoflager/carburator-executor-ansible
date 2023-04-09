@@ -1,13 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 role="$1"
-
-# Every modern linux should have python installed by default.
-if ! carburator has program python3; then
-  carburator print terminal error \
-    "Missing required program python. Please install it before proceeding."
-  exit 120
-fi
 
 # Package installation tasks on a local client node. Runs first
 #
@@ -25,7 +18,7 @@ if [ "$role" = 'client' ]; then
             --yes-val "Yes try to install with a script" \
             --no-val "No, I'll install everything"; exitcode=$?
 
-        if [[ $exitcode -ne 0 ]]; then
+        if [ "$exitcode" -ne 0 ]; then
           exit 120
         fi
     fi

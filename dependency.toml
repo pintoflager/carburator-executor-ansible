@@ -4,7 +4,12 @@
 # on_level: DepOnLevel,
 # collection: PackageType,
 
-[dependency.bash]
+[dependency.sh]
+optional = false
+on_level = "Node" # Node | Group | Project | Client
+collection = "Executor"
+
+[dependency.python]
 optional = false
 on_level = "Client" # Node | Group | Project | Client
 collection = "Executor"
