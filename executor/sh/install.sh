@@ -1,26 +1,24 @@
 #!/usr/bin/env sh
 
-role="$1"
+# ATTENTION: Supports only client nodes, pointless to read role from $1
 
-# Package installation tasks on a local client node. Runs first
+# Package installation tasks on a client node.
 #
 #
-if [ "$role" = 'client' ]; then
-    carburator print terminal info "Executing ansible install script on $role"
+carburator print terminal info "Executing ansible install on a client"
 
-    if ! carburator has program pip || ! carburator has program ansible ||
-    ! carburator has program ansible-runner; then
-        carburator print terminal warn \
-            "Missing ansible / dependencies on local client machine."
+if ! carburator has program pip || ! carburator has program ansible ||
+! carburator has program ansible-runner; then
+    carburator print terminal warn \
+        "Missing ansible / dependencies on client machine."
 
-        carburator prompt yes-no \
-            "Should we try to install dependencies? Installs on your PC." \
-            --yes-val "Yes try to install with a script" \
-            --no-val "No, I'll install everything"; exitcode=$?
+    carburator prompt yes-no \
+        "Should we try to install dependencies? Installs on your computer." \
+        --yes-val "Yes try to install with a script" \
+        --no-val "No, I'll install everything manually"; exitcode=$?
 
-        if [ "$exitcode" -ne 0 ]; then
-          exit 120
-        fi
+    if [ "$exitcode" -ne 0 ]; then
+      exit 120
     fi
 fi
 
