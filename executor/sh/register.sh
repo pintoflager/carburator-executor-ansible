@@ -1,6 +1,10 @@
 #!/usr/bin/env sh
 
 # ATTENTION: Supports only client nodes, pointless to read role from $1
+if [ "$1" = "server" ]; then
+    carburator print terminal error \
+        "Ansible package configuration error. Ansible only installs on client node."
+fi
 
 # Package installation tasks on a client node.
 #
@@ -18,33 +22,33 @@ if ! carburator has program pip || ! carburator has program ansible ||
         --no-val "No, I'll install everything manually"; exitcode=$?
 
     if [ "$exitcode" -ne 0 ]; then
-      exit 120
+        exit 120
     fi
 fi
 
 if ! carburator has program pip; then
-  carburator print terminal warn \
-    "Missing python package manager pip, trying install..."
+    carburator print terminal warn \
+        "Missing python package manager pip, trying install..."
 
-  curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-  python3 get-pip.py --user
-  
-  rm -f get-pip.py
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python3 get-pip.py --user
+    
+    rm -f get-pip.py
 fi
 
 if ! carburator has program ansible; then
-  carburator print terminal warn \
-    "Missing required program Ansible. Trying install...."
-    
-  python3 -m pip install --user ansible
+    carburator print terminal warn \
+        "Missing required program Ansible. Trying install...."
+        
+    python3 -m pip install --user ansible
 fi
 
 # ansible-runner is required for extracting runtime information from playbooks
 if ! carburator has program ansible-runner; then
-  carburator print terminal warn \
-    "Missing required program ansible-runner. Trying install..."
-    
-  python3 -m pip install --user ansible-runner
+    carburator print terminal warn \
+        "Missing required program ansible-runner. Trying install..."
+        
+    python3 -m pip install --user ansible-runner
 fi
 
 # # python library netaddr is required for ansible.netcommon collection
