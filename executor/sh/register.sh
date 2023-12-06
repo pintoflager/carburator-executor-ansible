@@ -2,18 +2,18 @@
 
 # ATTENTION: Supports only client nodes, pointless to read role from $1
 if [ "$1" = "server" ]; then
-    carburator print terminal error \
+    carburator log error \
         "Ansible package configuration error. Ansible only installs on client node."
 fi
 
 # Package installation tasks on a client node.
 #
 #
-carburator print terminal info "Executing ansible install on a client"
+carburator log info "Executing ansible install on a client"
 
 if ! carburator has program pip || ! carburator has program ansible ||
 ! carburator has program ansible-runner; then
-    carburator print terminal warn \
+    carburator log warn \
         "Missing ansible / dependencies on client machine."
 
     carburator prompt yes-no \
@@ -27,7 +27,7 @@ if ! carburator has program pip || ! carburator has program ansible ||
 fi
 
 if ! carburator has program pip; then
-    carburator print terminal warn \
+    carburator log warn \
         "Missing python package manager pip, trying install..."
 
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
@@ -37,7 +37,7 @@ if ! carburator has program pip; then
 fi
 
 if ! carburator has program ansible; then
-    carburator print terminal warn \
+    carburator log warn \
         "Missing required program Ansible. Trying install...."
         
     python3 -m pip install --user ansible
@@ -45,7 +45,7 @@ fi
 
 # ansible-runner is required for extracting runtime information from playbooks
 if ! carburator has program ansible-runner; then
-    carburator print terminal warn \
+    carburator log warn \
         "Missing required program ansible-runner. Trying install..."
         
     python3 -m pip install --user ansible-runner
@@ -53,20 +53,20 @@ fi
 
 # # python library netaddr is required for ansible.netcommon collection
 # if ! carburator has program "pip show netaddr"; then
-#   carburator print terminal error "Missing required python library netaddr. Please install it" \
+#   carburator log error "Missing required python library netaddr. Please install it" \
 #     "before proceeding." && exit 120
 # fi
 
 # # Ansible galaxy is required.
 # if ! carburator has program ansible-galaxy; then
-#   carburator print terminal error "Missing required program ansible-galaxy. Please install it" \
+#   carburator log error "Missing required program ansible-galaxy. Please install it" \
 #     "before running this script."
 # fi
 
 # ###
 # # Install required ansible collections / roles.
 # #
-# carburator print terminal attention "Installing required ansible collections..."
+# carburator log attention "Installing required ansible collections..."
 
 # # Install ansible role for authorizing ssh keys
 # ansible-galaxy collection install ansible.posix
