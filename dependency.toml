@@ -1,15 +1,9 @@
-# optional: bool,
-# optional_with: Option<Vec<String>>,
-# version: Option<VersionReq>,
-# on_level: DepOnLevel,
-# collection: PackageType,
-
 [dependency.sh]
 optional = false
-on_level = "Node" # Node | Cluster | Project | Client
+scope = "Node" # Node | Cluster | Project | Client
 collection = "Executor"
 
 [dependency.python]
 optional = false
-on_level = "Client" # Node | Cluster | Project | Client
+scope = "Client" # Node | Cluster | Project | Client
 collection = "Executor"
